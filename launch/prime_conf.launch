@@ -1,0 +1,42 @@
+<launch>
+  <arg name="world" default ="$(find prometheus_final)/worlds/robocupfield_custom.world"/> 
+  <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" >
+    <arg name = "world_name" value="$(arg world)"/>
+	  <arg name="paused" value="false"/>
+	  <arg name="gui" value="true"/>
+	  <arg name="verbose" value="false"/>
+  </include>
+  <param name="robot_description" textfile="$(find prometheus_final)/urdf/prometheus_final.urdf.xacro" />
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find prometheus_final)/urdf/prometheus_final.urdf.xacro -urdf -model prometheus_final"
+    output="screen" />
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find prometheus_final)/config/prometheus.yaml" command="load"/>
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/prometheus_final" args="
+     joint_state_controller
+     rf_joint_velocity_controller
+     lf_joint_velocity_controller
+     lb_joint_velocity_controller
+     rb_joint_velocity_controller
+     dribbler_velocity_controller
+     kicker_position_controller
+     "/>
+    <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen"/>
+  
+  <node name="ball_detection" pkg = "prometheus_final" type = "catch_ball.py"/>
+
+
+</launch>

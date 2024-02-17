@@ -1,0 +1,2680 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot
+  name="prometheus_final" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--Gazebo ROS Control Plugin-->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>prometheus_final</robotNamespace>
+    </plugin>
+    <!--BASE LINK SETTING  -->  
+  <plugin name="omni_plannar_steering" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+  </plugin>
+  </gazebo>
+  <!--BASE LINK SETTING-->
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.00350048179561457 -8.82625420624006E-05 0.0208952595374823"
+        rpy="0 0 0" />
+      <mass
+        value="1.28487468500406" />
+      <inertia
+        ixx="0.00162139959850944"
+        ixy="1.09782114163103E-07"
+        ixz="1.64762548607904E-05"
+        iyy="0.00167009509390206"
+        iyz="2.53483283598115E-08"
+        izz="0.00325167012714563" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.843137254901961 0.815686274509804 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!--RIGHT FRONT LINK SETTINGS-->
+  <link
+    name="rf_wheel">
+    <inertial>
+      <origin
+        xyz="-5.130618152549E-14 -0.00900489911686289 1.32199806657241E-13"
+        rpy="0 0 0" />
+      <mass
+        value="0.0389563583196813" />
+      <inertia
+        ixx="6.96753570378058E-06"
+        ixy="-1.3679582098157E-19"
+        ixz="5.62165614913027E-20"
+        iyy="1.37135800312478E-05"
+        iyz="-5.94756856680412E-20"
+        izz="6.96753570378055E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_joint"
+    type="continuous">
+    <origin
+      xyz="0.0446476694394124 -0.0818269917959932 0.00899999999994602"
+      rpy="0 0 -2.65290046303138" />
+    <parent
+      link="base_link" />
+    <child
+      link="rf_wheel" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <!--RIGHT FRONT WHEELS ROLLERS-->
+  <link
+    name="rf_roller_1">
+    <inertial>
+      <origin
+        xyz="-2.19774625290214E-07 -0.000147339529491142 -4.60670548013686E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539341760775" />
+      <inertia
+        ixx="4.54070236634262E-08"
+        ixy="-1.33944200874802E-12"
+        ixz="-1.11184567600862E-11"
+        iyy="2.13340721674892E-08"
+        iyz="-5.08868938614119E-13"
+        izz="4.53962621357603E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_1j"
+    type="continuous">
+    <origin
+      xyz="-0.021524 -0.00275 0.0076149"
+      rpy="-1.2307 0 1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_1" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_2">
+    <inertial>
+      <origin
+        xyz="-1.0112327862577E-07 -0.000147338253197862 5.21745965931242E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539320014803" />
+      <inertia
+        ixx="4.5414010770903E-08"
+        ixy="8.53165296361186E-13"
+        ixz="4.89825446118662E-13"
+        iyy="2.13340725356041E-08"
+        iyz="1.21294309521856E-12"
+        izz="4.53893457380149E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_2j"
+    type="continuous">
+    <origin
+      xyz="-0.0138934086520441 -0.00275000000000473 -0.0181171202364986"
+      rpy="-2.48738422080527 0 1.57079632679491" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_2" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_3">
+    <inertial>
+      <origin
+        xyz="-3.60904993529365E-07 -0.000147338301006078 -3.78911165679896E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539409779762" />
+      <inertia
+        ixx="4.53991390499127E-08"
+        ixy="-1.45967790069784E-12"
+        ixz="-1.20945100872979E-11"
+        iyy="2.13340839309074E-08"
+        iyz="-5.73483635357382E-14"
+        izz="4.54042338686752E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_3j"
+    type="continuous">
+    <origin
+      xyz="0.012937 -0.00275 -0.018812"
+      rpy="2.5187 0.23999 1.4017" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_3" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_4">
+    <inertial>
+      <origin
+        xyz="-5.94431460720912E-08 -0.000147340426069675 5.27040239700627E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539437810918" />
+      <inertia
+        ixx="4.54140436406743E-08"
+        ixy="9.02091953082696E-13"
+        ixz="-4.71522420103581E-13"
+        iyy="2.13340729089582E-08"
+        iyz="1.15612066343412E-12"
+        izz="4.53892659018487E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_4j"
+    type="continuous">
+    <origin
+      xyz="0.021889 -0.00275 0.0064907"
+      rpy="1.8591 0 -1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_4" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_5">
+    <inertial>
+      <origin
+        xyz="3.00392523938653E-07 -0.000147338673224431 4.14398274140027E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539350773946" />
+      <inertia
+        ixx="4.54026625777786E-08"
+        ixy="1.4151249697577E-12"
+        ixz="-1.23035423408623E-11"
+        iyy="2.13340777554219E-08"
+        iyz="2.57363369916583E-13"
+        izz="4.54006605767438E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_5j"
+    type="continuous">
+    <origin
+      xyz="0.00059103 -0.00275 0.022823"
+      rpy="0.02589 0 1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_5" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_6">
+    <inertial>
+      <origin
+        xyz="-2.24206414115025E-07 0.000147338882780845 -4.76189316020448E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539316359108" />
+      <inertia
+        ixx="4.54121274202642E-08"
+        ixy="-5.13618512320941E-13"
+        ixz="-6.55134727207E-12"
+        iyy="2.13340693516855E-08"
+        iyz="1.37782446977762E-12"
+        izz="4.53911967490346E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_6j"
+    type="continuous">
+    <origin
+      xyz="-0.012937 -0.01525 0.018812"
+      rpy="-0.60243 0 1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_6" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_7">
+    <inertial>
+      <origin
+        xyz="2.24172873514172E-07 0.000147339603903535 -4.58221249416413E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539237686729" />
+      <inertia
+        ixx="4.54060851311822E-08"
+        ixy="-1.36162812988169E-12"
+        ixz="1.14928719505028E-11"
+        iyy="2.13340594594364E-08"
+        iyz="4.63979733799799E-13"
+        izz="4.53971630630933E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_7.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_7j"
+    type="continuous">
+    <origin
+      xyz="-0.021889 -0.01525 -0.0064907"
+      rpy="-1.8591 0 1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_7" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_8">
+    <inertial>
+      <origin
+        xyz="-3.84714740619962E-07 0.000147339912727418 -3.68398216099575E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539480329269" />
+      <inertia
+        ixx="4.54042294858E-08"
+        ixy="5.56107421041032E-14"
+        ixz="-1.21360896406017E-11"
+        iyy="2.13340802641008E-08"
+        iyz="1.46957323599683E-12"
+        izz="4.53991174041401E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_8.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_8j"
+    type="continuous">
+    <origin
+      xyz="-0.00059103 -0.01525 -0.022823"
+      rpy="-3.1157 0 1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_8" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_9">
+    <inertial>
+      <origin
+        xyz="4.11971687513946E-07 0.000147339837026139 -3.37105088156486E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539531920026" />
+      <inertia
+        ixx="4.53966365561195E-08"
+        ixy="-1.46298482158066E-12"
+        ixz="1.13411512356184E-11"
+        iyy="2.13340869654702E-08"
+        iyz="-1.03622497362521E-13"
+        izz="4.54067294937751E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_9.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_9.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_9j"
+    type="continuous">
+    <origin
+      xyz="0.021524 -0.01525 -0.0076149"
+      rpy="1.9108 0 1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_9" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rf_roller_10">
+    <inertial>
+      <origin
+        xyz="3.65247850991901E-08 0.00014733817321276 5.23246340394801E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539458442033" />
+      <inertia
+        ixx="4.54140128786662E-08"
+        ixy="9.3155322354689E-13"
+        ixz="1.16747613732194E-12"
+        iyy="2.13340901435685E-08"
+        iyz="-1.12530735687212E-12"
+        izz="4.53893827266731E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_10.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rf_roller_10.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_roller_10j"
+    type="continuous">
+    <origin
+      xyz="0.013893 -0.01525 0.018117"
+      rpy="0.65421 0 1.5708" />
+    <parent
+      link="rf_wheel" />
+    <child
+      link="rf_roller_10" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--LEFT FRONT LINK SETTINGS-->
+  <link
+    name="lf_wheel">
+    <inertial>
+      <origin
+        xyz="3.53342355374764E-13 -0.00900489911745525 -3.03562730508133E-13"
+        rpy="0 0 0" />
+      <mass
+        value="0.0389563583196813" />
+      <inertia
+        ixx="6.96753570378056E-06"
+        ixy="7.83505476210228E-21"
+        ixz="5.71206203225495E-20"
+        iyy="1.37135800312478E-05"
+        iyz="-6.74076115452939E-21"
+        izz="6.96753570378056E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_joint"
+    type="continuous">
+    <origin
+      xyz="0.0446476694394707 0.0816033915726884 0.00900000000000112"
+      rpy="0 0 -0.488692190558411" />
+    <parent
+      link="base_link" />
+    <child
+      link="lf_wheel" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--LEFT FRONT WHEEL ROLLERS-->
+  <link
+    name="lf_roller_1">
+    <inertial>
+      <origin
+        xyz="-2.23983531777439E-07 -0.000147338259847404 -4.71888230269002E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539320327497" />
+      <inertia
+        ixx="4.54062538059696E-08"
+        ixy="-1.38133537583309E-12"
+        ixz="-1.14553099067102E-11"
+        iyy="2.13340741537148E-08"
+        iyz="-4.85304820499261E-13"
+        izz="4.53970898490008E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_1j"
+    type="continuous">
+    <origin
+      xyz="-0.0156999286975126 -0.00274999999999995 0.0165761602468557"
+      rpy="-0.758256821058521 0 1.5707963267949" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_1" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_2">
+    <inertial>
+      <origin
+        xyz="6.09835875409193E-08 -0.000147340264213591 -5.31926638132341E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539473216151" />
+      <inertia
+        ixx="4.54140653184597E-08"
+        ixy="-9.06279329768249E-13"
+        ixz="-4.66345053331612E-13"
+        iyy="2.13340766254018E-08"
+        iyz="-1.16463834938261E-12"
+        izz="4.53892694934369E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_2j"
+    type="continuous">
+    <origin
+      xyz="-0.0206164099959305 -0.00274999999999986 -0.00980920427537604"
+      rpy="-2.01489388249438 0 1.5707963267949" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_2" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_3">
+    <inertial>
+      <origin
+        xyz="5.06713228903832E-07 -0.000147338910557238 7.34481696851308E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539309324117" />
+      <inertia
+        ixx="4.53893175610577E-08"
+        ixy="1.16400570424861E-12"
+        ixz="-3.43935044062127E-13"
+        iyy="2.13340713590343E-08"
+        iyz="-8.48749353651685E-13"
+        izz="4.5413983167911E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_3j"
+    type="continuous">
+    <origin
+      xyz="0.0029582865940241 -0.00274999999999989 -0.0226385818916302"
+      rpy="3.01134981689428 -0.068205684093041 1.57972303921801" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_3" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_4">
+    <inertial>
+      <origin
+        xyz="-2.94458208621728E-07 -0.000147340487392178 4.55379331035233E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539666748033" />
+      <inertia
+        ixx="4.54088054612058E-08"
+        ixy="2.47047768836041E-13"
+        ixz="1.02329048156636E-11"
+        iyy="2.13340962106202E-08"
+        iyz="1.45558263684776E-12"
+        izz="4.53945923266177E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_4j"
+    type="continuous">
+    <origin
+      xyz="0.0224447316595033 -0.00274999999999997 -0.0041822087907489"
+      rpy="1.75501730181332 0 1.57079632679488" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_4" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_5">
+    <inertial>
+      <origin
+        xyz="2.71609476687473E-07 -0.000147339699725385 4.81130514942696E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539574968426" />
+      <inertia
+        ixx="4.54048587135436E-08"
+        ixy="1.4514290827857E-12"
+        ixz="-1.20259903282334E-11"
+        iyy="2.13340865732076E-08"
+        iyz="4.10818361691801E-13"
+        izz="4.53985546275884E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_5j"
+    type="continuous">
+    <origin
+      xyz="0.0109133204399212 -0.00274999999999995 0.020053834710899"
+      rpy="0.498380240377435 0 1.5707963267949" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_5" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_6">
+    <inertial>
+      <origin
+        xyz="-3.9926691938752E-07 0.000147336301084378 -3.80752566461751E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539533686545" />
+      <inertia
+        ixx="4.54042363405629E-08"
+        ixy="5.62238169144401E-14"
+        ixz="-1.21570728550476E-11"
+        iyy="2.13340824823764E-08"
+        iyz="1.47895570605167E-12"
+        izz="4.5399123192049E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_6j"
+    type="continuous">
+    <origin
+      xyz="-0.0029582914855829 -0.0152499897676238 0.0226385887340916"
+      rpy="-0.129938290340481 0 1.5707963267949" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_6" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_7">
+    <inertial>
+      <origin
+        xyz="3.86995565482273E-07 0.00014734528483562 -3.2680508937899E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539377848831" />
+      <inertia
+        ixx="4.53966040699277E-08"
+        ixy="-1.42682709324785E-12"
+        ixz="1.12825662192819E-11"
+        iyy="2.13340770300682E-08"
+        iyz="-1.065136399151E-13"
+        izz="4.54066963836087E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_7.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_7j"
+    type="continuous">
+    <origin
+      xyz="-0.0224447365510626 -0.0152499897676239 0.00418221563321131"
+      rpy="-1.38657535177643 0 1.57079632679491" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_7" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_8">
+    <inertial>
+      <origin
+        xyz="1.99644414888844E-08 0.000147345585474301 5.19797756323714E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539433702022" />
+      <inertia
+        ixx="4.54139924750154E-08"
+        ixy="9.26341898651297E-13"
+        ixz="1.18712265115222E-12"
+        iyy="2.13340902762064E-08"
+        iyz="-1.11097676144442E-12"
+        izz="4.53893903718589E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_8.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_8j"
+    type="continuous">
+    <origin
+      xyz="-0.0109133253314825 -0.015249989767624 -0.0200538278684376"
+      rpy="-2.64321241321233 0 1.5707963267949" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_8" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_9">
+    <inertial>
+      <origin
+        xyz="-2.27899752625049E-07 0.000147337691306329 -4.7972180255984E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539448981912" />
+      <inertia
+        ixx="4.54121979419639E-08"
+        ixy="-5.22203925734726E-13"
+        ixz="-6.55010053816292E-12"
+        iyy="2.13340824255313E-08"
+        iyz="1.38512618382391E-12"
+        izz="4.53911823953326E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_9.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_9.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_9j"
+    type="continuous">
+    <origin
+      xyz="0.0156999238059492 -0.0152499897676239 -0.0165761534043967"
+      rpy="2.38333583253132 0 1.5707963267949" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_9" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lf_roller_10">
+    <inertial>
+      <origin
+        xyz="2.13683138433618E-07 0.000147332004590162 -4.76300018537046E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539314926649" />
+      <inertia
+        ixx="4.5406145743595E-08"
+        ixy="-1.38728517092104E-12"
+        ixz="1.15132961385898E-11"
+        iyy="2.1334060815454E-08"
+        iyz="4.8128457322342E-13"
+        izz="4.53971262848059E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_10.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lf_roller_10.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_roller_10j"
+    type="continuous">
+    <origin
+      xyz="0.0206164051043709 -0.0152499897676238 0.00980921111783629"
+      rpy="1.12669877109546 0 1.5707963267949" />
+    <parent
+      link="lf_wheel" />
+    <child
+      link="lf_roller_10" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--RIGHT BACK LINK SETTINGS-->
+  <link
+    name="rb_wheel">
+    <inertial>
+      <origin
+        xyz="-3.37230243729891E-15 -0.00900489911691322 2.60902410786912E-15"
+        rpy="0 0 0" />
+      <mass
+        value="0.0389563583196813" />
+      <inertia
+        ixx="6.96753570378059E-06"
+        ixy="-1.73641754187132E-20"
+        ixz="4.61843438765856E-20"
+        iyy="1.37135800312478E-05"
+        iyz="-1.38282341950435E-20"
+        izz="6.96753570378053E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0642425134965542 -0.0655532449190786 0.00900000000000001"
+      rpy="0 0 2.35619449019234" />
+    <parent
+      link="base_link" />
+    <child
+      link="rb_wheel" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--RIGHT BACK WHEEL ROLLERS-->
+  <link
+    name="rb_roller_1">
+    <inertial>
+      <origin
+        xyz="-2.40775482593381E-07 -0.000147339202694038 -4.77523948827496E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539490595951" />
+      <inertia
+        ixx="4.54062734833563E-08"
+        ixy="-1.39625710079431E-12"
+        ixz="-1.15184398663045E-11"
+        iyy="2.13340849814551E-08"
+        iyz="-4.82616379173692E-13"
+        izz="4.53971072215902E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_1j"
+    type="continuous">
+    <origin
+      xyz="-0.00912720895744017 -0.00274999999999997 0.0209272766093343"
+      rpy="-0.411267823025159 0 1.57079632679489" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_1" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_2">
+    <inertial>
+      <origin
+        xyz="6.47419346397338E-08 -0.000147341423590464 -5.4857136790043E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.0013953958853924" />
+      <inertia
+        ixx="4.54141248053791E-08"
+        ixy="-9.19681200932954E-13"
+        ixz="-4.48379522719565E-13"
+        iyy="2.13340779236915E-08"
+        iyz="-1.18570330840807E-12"
+        izz="4.53892252780573E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_2j"
+    type="continuous">
+    <origin
+      xyz="-0.0227234854666781 -0.00275000000000001 -0.00221360743629348"
+      rpy="-1.66790488446102 0 1.5707963267949" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_2" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_3">
+    <inertial>
+      <origin
+        xyz="5.22491399281705E-07 -0.000147338342567811 4.47702422357033E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539379341495" />
+      <inertia
+        ixx="4.53893995451717E-08"
+        ixy="1.12599706380334E-12"
+        ixz="1.33159685208739E-12"
+        iyy="2.13340798780879E-08"
+        iyz="-9.3702194958546E-13"
+        izz="4.54139633161862E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_3j"
+    type="continuous">
+    <origin
+      xyz="-0.0049166774038287 -0.00274999999999999 -0.0222953612427142"
+      rpy="-2.92454194589694 0 1.5707963267949" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_3" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_4">
+    <inertial>
+      <origin
+        xyz="-3.19685325593511E-07 -0.000147340086419256 4.46837771679587E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539573465183" />
+      <inertia
+        ixx="4.54087307963999E-08"
+        ixy="2.32000483295897E-13"
+        ixz="1.02547759372744E-11"
+        iyy="2.133408500203E-08"
+        iyz="1.48236417751278E-12"
+        izz="4.53946627123606E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_4j"
+    type="continuous">
+    <origin
+      xyz="0.019684811719396 -0.00274999999999995 -0.011565683603162"
+      rpy="2.10200629984671 0 1.5707963267949" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_4" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_5">
+    <inertial>
+      <origin
+        xyz="2.43886670433721E-07 -0.000147338790790416 4.64719564566285E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.0013953925987374" />
+      <inertia
+        ixx="4.5404800325625E-08"
+        ixy="1.41304362340863E-12"
+        ixz="-1.19229617399793E-11"
+        iyy="2.13340641367703E-08"
+        iyz="4.0678431865469E-13"
+        izz="4.539850666648E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_5j"
+    type="continuous">
+    <origin
+      xyz="0.0170825601085604 -0.00274999999999994 0.0151473756728321"
+      rpy="0.845369238410752 0 1.5707963267949" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_5" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_6">
+    <inertial>
+      <origin
+        xyz="-3.90045319882681E-07 0.000147346202653435 -3.44880671951375E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539422583446" />
+      <inertia
+        ixx="4.54042045993263E-08"
+        ixy="6.60346474867806E-14"
+        ixz="-1.2117491413102E-11"
+        iyy="2.13340789893279E-08"
+        iyz="1.47899254052615E-12"
+        izz="4.53991625020494E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_6j"
+    type="continuous">
+    <origin
+      xyz="0.00491668114369825 -0.0152500039189007 0.0222953445194905"
+      rpy="0.217050707692892 0 1.5707963267949" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_6" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_7">
+    <inertial>
+      <origin
+        xyz="4.16612164159252E-07 0.000147327119864316 -3.32263468273697E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539544347283" />
+      <inertia
+        ixx="4.53966585598475E-08"
+        ixy="-1.47407342691648E-12"
+        ixz="1.13502838930017E-11"
+        iyy="2.13340879681541E-08"
+        iyz="-9.99241718102339E-14"
+        izz="4.54067258740392E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_7.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_7j"
+    type="continuous">
+    <origin
+      xyz="-0.0196848079795271 -0.0152500039189009 0.0115656668799395"
+      rpy="-1.03958635374307 0 1.57079632679491" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_7" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_8">
+    <inertial>
+      <origin
+        xyz="5.04284654971598E-08 0.00014732393282807 5.3080527573357E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539532973596" />
+      <inertia
+        ixx="4.54140615105575E-08"
+        ixy="9.43579152549662E-13"
+        ixz="1.13450410607055E-12"
+        iyy="2.13340896598942E-08"
+        iyz="-1.1524128013455E-12"
+        izz="4.5389352491907E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_8.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_8j"
+    type="continuous">
+    <origin
+      xyz="-0.0170825563686924 -0.015250003918901 -0.0151473923960548"
+      rpy="-2.29622341517897 0 1.5707963267949" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_8" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_9">
+    <inertial>
+      <origin
+        xyz="-2.12449241157597E-07 0.000147341813418578 -4.92879354468956E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539336919468" />
+      <inertia
+        ixx="4.54121455907582E-08"
+        ixy="-5.15685917402683E-13"
+        ixz="-6.53182301176713E-12"
+        iyy="2.13340741711186E-08"
+        iyz="1.36950123863908E-12"
+        izz="4.53911930515838E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_9.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_9.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_9j"
+    type="continuous">
+    <origin
+      xyz="0.0091272126973078 -0.0152500039189009 -0.0209272933325582"
+      rpy="2.73032483056468 0 1.57079632679491" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_9" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="rb_roller_10">
+    <inertial>
+      <origin
+        xyz="2.26790524252701E-07 0.000147357223968803 -4.64878001614488E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539240967916" />
+      <inertia
+        ixx="4.54060923099884E-08"
+        ixy="-1.36590982698918E-12"
+        ixz="1.14980208518405E-11"
+        iyy="2.13340556553112E-08"
+        iyz="4.6732024185743E-13"
+        izz="4.5397138638823E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_10.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/rb_roller_10.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_roller_10j"
+    type="continuous">
+    <origin
+      xyz="0.0227234892065467 -0.0152500039189007 0.00221359071306901"
+      rpy="1.47368776912882 0 1.5707963267949" />
+    <parent
+      link="rb_wheel" />
+    <child
+      link="rb_roller_10" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--LEFT BACK LINK SETTINGS-->
+  <link
+    name="lb_wheel">
+    <inertial>
+      <origin
+        xyz="2.35319541630474E-11 -0.00900489896476273 -4.28218904779953E-10"
+        rpy="0 0 0" />
+      <mass
+        value="0.0389563583196813" />
+      <inertia
+        ixx="6.96753570378051E-06"
+        ixy="6.56450534122083E-21"
+        ixz="-1.1814622015261E-21"
+        iyy="1.37135800312478E-05"
+        iyz="-3.44211817036133E-19"
+        izz="6.96753570378062E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_joint"
+    type="continuous">
+    <origin
+      xyz="-0.0642425134965542 0.0653296446958099 0.00900000000000012"
+      rpy="0 0 0.785398163397449" />
+    <parent
+      link="base_link" />
+    <child
+      link="lb_wheel" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--LEFT BACK WHEEL ROLLERS-->
+  <link
+    name="lb_roller_1">
+    <inertial>
+      <origin
+        xyz="2.65644053525083E-07 -0.000147338598933344 4.57394661368404E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539451268109" />
+      <inertia
+        ixx="4.54047910423719E-08"
+        ixy="1.41852170449312E-12"
+        ixz="-1.19862921937281E-11"
+        iyy="2.13340831171135E-08"
+        iyz="3.93505360035776E-13"
+        izz="4.53985816800764E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="lb_roller_1j"
+    type="continuous">
+    <origin
+      xyz="-0.00538519664075929 -0.00275000000000546 0.0221868543686739"
+      rpy="-0.238115391906464 0 1.5707963267949" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_1" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_2">
+    <inertial>
+      <origin
+        xyz="1.09321041837709E-05 -0.000146933074146982 -4.69206156650248E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539335594266" />
+      <inertia
+        ixx="4.52682887558103E-08"
+        ixy="1.81692288658437E-09"
+        ixz="-1.14193102380133E-11"
+        iyy="2.14719911842835E-08"
+        iyz="-1.343896250789E-12"
+        izz="4.5397044856162E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_2j"
+    type="continuous">
+    <origin
+      xyz="-0.022765 -0.00275 0.0017345"
+      rpy="-1.4945 -0.075605 1.565" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_2" />
+    <axis
+      xyz="0.075752 -0.99713 0" />
+  </joint>
+  <link
+    name="lb_roller_3">
+    <inertial>
+      <origin
+        xyz="6.89642931026024E-08 -0.00014733965288255 -5.17590506454724E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539273648454" />
+      <inertia
+        ixx="4.54139798029543E-08"
+        ixy="-8.90139466394626E-13"
+        ixz="-4.36680808970182E-13"
+        iyy="2.13340678607654E-08"
+        iyz="-1.161070977797E-12"
+        izz="4.53893373894174E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_3j"
+    type="continuous">
+    <origin
+      xyz="-0.0086844 -0.00275 -0.021115"
+      rpy="-2.7514 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_3" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_4">
+    <inertial>
+      <origin
+        xyz="5.34931858829635E-07 -0.000147338841200356 3.22336790037347E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539546102825" />
+      <inertia
+        ixx="4.5389376474296E-08"
+        ixy="1.13002370273233E-12"
+        ixz="1.36425233214467E-12"
+        iyy="2.13340933992647E-08"
+        iyz="-9.50303178690665E-13"
+        izz="4.54140369924233E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_4j"
+    type="continuous">
+    <origin
+      xyz="0.017398 -0.00275 -0.014784"
+      rpy="2.2752 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_4" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_5">
+    <inertial>
+      <origin
+        xyz="-2.97140678923169E-07 -0.000147338864258689 4.20195969894066E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539322406287" />
+      <inertia
+        ixx="4.54086638712717E-08"
+        ixy="2.30173687931599E-13"
+        ixz="1.01585708954256E-11"
+        iyy="2.13340721111102E-08"
+        iyz="1.42669489110408E-12"
+        izz="4.53946434884934E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_5j"
+    type="continuous">
+    <origin
+      xyz="0.019437 -0.00275 0.011978"
+      rpy="1.0185 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_5" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_6">
+    <inertial>
+      <origin
+        xyz="-4.04895083849777E-07 0.000147341923785314 -3.56214196778337E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539370471573" />
+      <inertia
+        ixx="4.54041531984933E-08"
+        ixy="7.36155102472686E-14"
+        ixz="-1.21207609108336E-11"
+        iyy="2.13340695253886E-08"
+        iyz="1.48598527937525E-12"
+        izz="4.53991800874018E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_6j"
+    type="continuous">
+    <origin
+      xyz="-0.017398 -0.01525 0.014784"
+      rpy="-0.86643 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_6" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_7">
+    <inertial>
+      <origin
+        xyz="3.79918546102032E-07 0.000147338171878231 -3.58993282115194E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539225252719" />
+      <inertia
+        ixx="4.53967085294771E-08"
+        ixy="-1.46330490293456E-12"
+        ixz="1.12991294608119E-11"
+        iyy="2.13340582228559E-08"
+        iyz="-8.00729393469798E-14"
+        izz="4.54065663005389E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_7.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_7.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_7j"
+    type="continuous">
+    <origin
+      xyz="-0.019437 -0.01525 -0.011978"
+      rpy="-2.1231 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_7" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_8">
+    <inertial>
+      <origin
+        xyz="5.21628737357172E-08 0.000147338495208912 5.36465485562188E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539445496589" />
+      <inertia
+        ixx="4.5414018177466E-08"
+        ixy="9.3619545716425E-13"
+        ixz="1.12016061153978E-12"
+        iyy="2.13340793923823E-08"
+        iyz="-1.14657595517511E-12"
+        izz="4.53893454406918E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_8.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_8.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_8j"
+    type="continuous">
+    <origin
+      xyz="0.0053852 -0.01525 -0.022187"
+      rpy="2.9035 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_8" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_9">
+    <inertial>
+      <origin
+        xyz="-2.14858116548422E-07 0.00014734106186598 -4.85698267715939E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539411568861" />
+      <inertia
+        ixx="4.54121607421479E-08"
+        ixy="-5.22055234308769E-13"
+        ixz="-6.56476109527629E-12"
+        iyy="2.1334066626032E-08"
+        iyz="1.37436146762825E-12"
+        izz="4.53911239781963E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_9.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_9.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_9j"
+    type="continuous">
+    <origin
+      xyz="0.022765 -0.01525 -0.0017345"
+      rpy="1.6468 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_9" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="lb_roller_10">
+    <inertial>
+      <origin
+        xyz="2.44374253582924E-07 0.000147339013310877 -4.77318872482702E-07"
+        rpy="0 0 0" />
+      <mass
+        value="0.00139539493637632" />
+      <inertia
+        ixx="4.54061732161867E-08"
+        ixy="-1.39979572415513E-12"
+        ixz="1.1558745820093E-11"
+        iyy="2.13340857132829E-08"
+        iyz="4.77449285009063E-13"
+        izz="4.53972132449756E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_10.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/lb_roller_10.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_roller_10j"
+    type="continuous">
+    <origin
+      xyz="0.0086844 -0.01525 0.021115"
+      rpy="0.3902 0 1.5708" />
+    <parent
+      link="lb_wheel" />
+    <child
+      link="lb_roller_10" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--DRIBBLER LINK SETTINGS-->
+  <link
+    name="dribbler_link">
+    <inertial>
+      <origin
+        xyz="-3.87375456320782E-05 -0.0409997892671084 -3.96662819577287E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.0241128641798855" />
+      <inertia
+        ixx="1.102363801094E-05"
+        ixy="-1.22163139229377E-11"
+        ixz="-2.0941388413754E-10"
+        iyy="1.05237272862047E-06"
+        iyz="-4.13561199268897E-11"
+        izz="1.10273083883318E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/dribbler_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.298039215686275 0.298039215686275 0.298039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/dribbler_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="dribbler_joint"
+    type="continuous">
+    <origin
+      xyz="0.079199 -0.041112 0.025"
+      rpy="0 0 3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="dribbler_link" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <!--####################################################################-->
+  <!--KICKER LINK SETTINGS-->
+  <link
+    name="kicker">
+    <inertial>
+      <origin
+        xyz="-6.93889390390723E-18 0.104102445666438 1.11022302462516E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.0214019082131495" />
+      <inertia
+        ixx="4.31926055084354E-05"
+        ixy="-1.71320322385931E-20"
+        ixz="1.04883597617209E-14"
+        iyy="4.01022876291696E-06"
+        iyz="2.51623027462644E-19"
+        izz="4.68719190158993E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/kicker.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/kicker.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="kicker_joint"
+    type="prismatic">
+    <origin
+      xyz="-0.073603 3.0668E-05 0.007"
+      rpy="0 0 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="kicker" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0.0" upper="0.04" effort="100" velocity="300" />
+  </joint>
+  <!--####################################################################-->
+  <joint
+    name="camera_joint"
+    type="fixed">
+    <origin
+      xyz="0.0734399264553863 -0.000111800111634308 0.0678568681482025"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="camera_link" />
+    <axis   
+      xyz="0 1 0" />
+  </joint>                                                            <!--CAMERA LINK SETTINGS-->
+
+  <link
+    name="camera_link">
+    <inertial>
+      <origin
+        xyz="-2.63337471674702E-05 -0.00347923630982563 -0.000162556993460343"
+        rpy="0 0 0" />
+      <mass
+        value="0.00154848038962445" />
+      <inertia
+        ixx="6.15271621780032E-08"
+        ixy="-1.55024817384197E-11"
+        ixz="-3.76747400816833E-10"
+        iyy="9.81432222447607E-08"
+        iyz="2.74781334419596E-09"
+        izz="5.63298102642908E-08" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="-0.17453292519943 0 -1.5707963267949" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/camera.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prometheus_final/meshes/camera.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera_bot">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise is sampled independently per pixel on each frame.
+               That pixel's noise value is added to each of its color
+               channels, which at that point lie in the range [0,1]. -->
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>prometheus_final/camera_bot</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!--####################################################################-->
+  <!--
+  <transmission name="rf_wheel_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="rf_wheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="rf_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <transmission name="lf_wheel_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="lf_wheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lf_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <transmission name="rb_wheel_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="rb_wheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="rb_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <transmission name="lb_wheel_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="lb_wheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lb_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  -->
+
+  <transmission name="dribller_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="dribbler_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="dribbler_joint">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <transmission name="kicker_trans" type="SimpleTransmission">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="kicker_solenoid">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="kicker_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+</robot>

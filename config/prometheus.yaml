@@ -1,0 +1,63 @@
+prometheus_final:
+
+    joint_state_controller:
+        type: joint_state_controller/JointStateController
+        publish_rate: 100
+
+    rf_joint_velocity_controller:
+        type: velocity_controllers/JointVelocityController
+        joint: rf_joint
+        pid: {p: 0.0, i: 0.0, d: 0.0}
+
+    lf_joint_velocity_controller:
+        type: velocity_controllers/JointVelocityController
+        joint: lf_joint
+        pid: {p: 0.0, i: 0.0, d: 0.0}
+
+    rb_joint_velocity_controller:
+        type: velocity_controllers/JointVelocityController
+        joint: rb_joint
+        pid: {p: 0.0, i: 0.0, d: 0.0}
+
+    lb_joint_velocity_controller:
+        type: velocity_controllers/JointVelocityController
+        joint: lb_joint
+        pid: {p: 0.0, i: 0.0, d: 0.0}
+    
+    dribbler_velocity_controller:
+        type: velocity_controllers/JointVelocityController
+        joint: dribbler_joint
+        pid: {p: 0.0, i: 0.0, d: 0.0}
+    
+    kicker_position_controller:
+        type: effort_controllers/JointPositionController
+        joint: kicker_joint
+        pid: {p: 60.0, i: 0.01, d: 0.01}
+
+
+/prometheus_final/gazebo_ros_control:
+    pid_gains:
+        rf_joint:
+            p: 0.001
+            i: 0.00
+            d: 0.00
+        lf_joint:
+            p: 0.001
+            i: 0.00
+            d: 0.00
+        rb_joint:
+            p: 0.001
+            i: 0.00
+            d: 0.00
+        lb_joint:
+            p: 0.001
+            i: 0.00
+            d: 0.00
+        dribbler_joint:
+            p: 0.001
+            i: 0.00
+            d: 0.00
+        kicker_joint:
+            p: 60.0
+            i: 0.01
+            d: 0.01
